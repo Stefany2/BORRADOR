@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversación con Chatbot</title>
+    <style>
+        #chat-container {
+            max-width: 400px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        #chat-box {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        #user-input {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div id="chat-container">
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Escribe tu mensaje...">
+    <button onclick="enviarMensaje()">Enviar</button>
+</div>
+
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+
+    function enviarMensaje() {
+        const mensajeUsuario = userInput.value;
+        if (mensajeUsuario.trim() === '') return;
+
+        agregarMensaje('Usuario', mensajeUsuario);
+        userInput.value = ''; // Limpiar el campo de entrada
+
+        // Obtener respuesta del chatbot
+        const mensajeChatbot = obtenerRespuestaChatbot(mensajeUsuario);
+        agregarMensaje('Chatbot', mensajeChatbot);
+    }
+
+    function obtenerRespuestaChatbot(mensajeUsuario) {
+        // Lógica simple del chatbot
+        if (mensajeUsuario.includes('hola') || mensajeUsuario.includes('hi')) {
+            return '¡Hola! ¿En qué puedo ayudarte?';
+        } else if (mensajeUsuario.includes('Estoy buscando tornillos de 3 pulgadas')) {
+            return 'Hola, Tenemos de acero inoxidable o zincado ¿cual prefieres?'; 
+        } else if (mensajeUsuario.includes('Acero inoxidable, por favor')) {
+            return 'Perfecto,¿Te gustaria agregarlos a tu carrito de compras?';
+        } else if (mensajeUsuario.includes('Si, gracias')) {
+            return 'Perfecto,¿necesitas algo mas?';
+        } else if (mensajeUsuario.includes('No, gracias')) {
+            return 'Tu pedido llegara en 15 minutos ¡Gracias por la compra!';
+        } else if (mensajeUsuario.includes('Apartir de que ora atiende')) {
+            return 'De 8:00am a 8:00pm';
+        } else if (mensajeUsuario.includes('Cual es su direcciòn')) { 
+            return 'En el Jr. San Martin 958 - HUÀNUCO';
+        } else if (mensajeUsuario.includes('Hola, estoy buscando pintura para exteriores')) { 
+            return 'Hola!, tenemos una gran variedad de pinturas para exteriores.¿tienes algun color de preferencia';
+        } else if (mensajeUsuario.includes('En color azul marino')) { 
+            return 'Tenemos una pintura azul marino mate de la marca pato que es resistente a la intenperie y una excelente cobertura.¿te gustaria saber mas del producto';
+        } else if (mensajeUsuario.includes('Si, cuanto cuesta?')) { 
+            return 'La pintura azul marino mate marca pato tiene un costo de S/45.00 por galòn.¿Te gustaria agregarlo al carrito de compras?';
+        } else if (mensajeUsuario.includes('Si, gracias')) {
+        }
+    }
+
+    function agregarMensaje(remite, mensaje) {
+        const elementoMensaje = document.createElement('div');
+        elementoMensaje.innerHTML = `<strong>${remite}:</strong> ${mensaje}`;
+        chatBox.appendChild(elementoMensaje);
+
+        // Desplazarse hasta el final del cuadro de chat
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+
+</body>
+</html>
